@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Boites</string>
+    <string-array name="Titres"><item>Docteur</item><item>Madame</item><item>Monsieur</item></string-array>
+</resources>
