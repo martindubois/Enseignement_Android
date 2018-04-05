@@ -9,10 +9,20 @@ import android.widget.EditText;
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
 
+    EditText mEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        Intent lIntent = getIntent();
+
+        Bundle lBundle = lIntent.getBundleExtra( "Data" );
+
+        mEditText = ( EditText )( findViewById( R.id.editText2 ) ); // dynamic_cast
+
+        mEditText.setText( lBundle.getString( "Text" ) );
 
         Button lButton = ( Button )( findViewById( R.id.button2 ) ); // dynamic_cast
 
@@ -21,11 +31,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        EditText  lEditText = ( EditText )( findViewById( R.id.editText2 ) ); // dynamic_cast
-
         Intent  lIntent = new Intent();
 
-        lIntent.putExtra( "Text", lEditText.getText().toString() );
+        lIntent.putExtra( "Text", mEditText.getText().toString() );
 
         setResult( 0, lIntent );
 

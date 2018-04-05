@@ -9,10 +9,14 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    EditText mEditText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mEditText = (EditText)( findViewById( R.id.editText ) ); // dynamic_cast
 
         Button  lButton = ( Button )( findViewById( R.id.button ) ); // dynamic_cast
 
@@ -23,14 +27,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        EditText  lEditText = (EditText)( findViewById( R.id.editText ) ); // dynamic_cast
-
-        lEditText.setText( data.getStringExtra( "Text" ) );
+        mEditText.setText( data.getStringExtra( "Text" ) );
     }
 
     @Override
     public void onClick(View v) {
+        EditText  lEditText = (EditText)( findViewById( R.id.editText ) ); // dynamic_cast
+
+        Bundle lBundle = new Bundle();
+
+        lBundle.putString( "Text", mEditText.getText().toString() );
+
         Intent  lIntent = new Intent( this, Main2Activity.class );
+
+        lIntent.putExtra( "Data", lBundle );
 
         startActivityForResult( lIntent, 0 );
     }
